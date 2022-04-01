@@ -9,7 +9,7 @@ public class CharacterCollisionHandler : MonoBehaviour
 	{
 		if (other.gameObject.CompareTag("Stackable"))
 		{
-			
+			Player.Instance.StackObjects(other.gameObject,Player.Instance.characters.Count - 1);
 		}
 	}
 }

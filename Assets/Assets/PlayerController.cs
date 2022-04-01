@@ -1,24 +1,24 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public float speed = 100f;
-
     // [SerializeField] float lerpValue = 20f;
-    [SerializeField] float clampValue = 10f;
-
     public float InputSensitivity = 0.01f;
+    public bool CanSwerve = true;
+    
+    [SerializeField] float clampValue = 10f;
+    
+    private Rigidbody rgb;
     private Vector3 PreviousMousePosition;
     private float DesiredHorizontalPosition;
 
-    Rigidbody rgb;
-
-    public bool CanSwerve = true;
-    protected void Awake()
+    private void Awake()
     {
         rgb = GetComponent<Rigidbody>();
     }
-    
+
     protected void Update()
     {
         if (CanSwerve)
