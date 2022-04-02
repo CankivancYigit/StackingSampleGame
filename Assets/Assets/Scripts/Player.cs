@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -9,13 +10,20 @@ public class Player : MonoBehaviour
     public List<GameObject> characters = new List<GameObject>();
     
     [SerializeField] private float stackGap;
+    [SerializeField] private float objectStackAnimDelay = 0.2f;
 
+    private Vector3 objectScale;
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
         }
+    }
+
+    private void Start()
+    {
+       objectScale  = characters[0].transform.localScale;
     }
 
     public void StackObjects(GameObject other, int index)
@@ -26,5 +34,18 @@ public class Player : MonoBehaviour
         newPos.z += stackGap;
         other.transform.localPosition = newPos;
         other.transform.localRotation = newRotation;
+        StartCoroutine(ObjectStackingAnim());
+    }
+
+    public IEnumerator ObjectStackingAnim()
+    {
+        for (int i = characters.Count - 1; i >= 0; i--)
+        {
+            Vector3 animObjectScale = objectScale * 1.5f;
+
+            characters[i].transform.DOScale(animObjectScale, 0.1f);
+                yield return new WaitForSeconds(objectStackAnimDelay);
+                characters[i].transform.DOScale(objectScale, 0.1f);
+        }
     }
 }
