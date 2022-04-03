@@ -11,6 +11,7 @@ public class CharacterCollisionHandler : MonoBehaviour
 		{
 			Player.Instance.StackObjects(other.gameObject,Player.Instance.characters.Count - 1);
 			Player.Instance.characters.Add(other.gameObject);
+			other.gameObject.GetComponent<Animator>().SetBool("Run 1",true);
 			other.gameObject.tag = "Untagged";
 		}
 
