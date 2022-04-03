@@ -10,6 +10,8 @@ public class UiManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI coinText;
+
+    [SerializeField] private GameObject TapToPlayPanel;
     
     private void Awake()
     {
@@ -26,6 +28,11 @@ public class UiManager : MonoBehaviour
 
     public void SetLevelText()
     {
-	    
+	    //levelText.text = "Level" + 
+    }
+
+    public void SetTapToPlayPanel(bool isActive)
+    {
+	    TapToPlayPanel.SetActive(isActive);
     }
 }
