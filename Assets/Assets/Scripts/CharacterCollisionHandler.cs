@@ -13,5 +13,15 @@ public class CharacterCollisionHandler : MonoBehaviour
 			Player.Instance.characters.Add(other.gameObject);
 			other.gameObject.tag = "Untagged";
 		}
+
+		if (other.gameObject.CompareTag("Collectible"))
+		{
+			ScoreSystem.Instance.IncreaseCoinCount(5);
+		}
+
+		if (other.gameObject.CompareTag("Diamond"))
+		{
+			ScoreSystem.Instance.IncreaseCoinCount(10);
+		}
 	}
 }
