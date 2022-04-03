@@ -17,11 +17,21 @@ public class CharacterCollisionHandler : MonoBehaviour
 		if (other.gameObject.CompareTag("Collectible"))
 		{
 			ScoreSystem.Instance.IncreaseCoinCount(5);
+			Destroy(other.gameObject);
 		}
 
 		if (other.gameObject.CompareTag("Diamond"))
 		{
 			ScoreSystem.Instance.IncreaseCoinCount(10);
+			Destroy(other.gameObject);
+		}
+
+		if (other.gameObject.CompareTag("Finish"))
+		{
+			if (gameObject == Player.Instance.characters[0])
+			{
+				ScoreSystem.Instance.IncreaseTotalCoinCount();
+			}
 		}
 	}
 }

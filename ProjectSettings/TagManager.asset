@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Stackable
   - Collectible
+  - Diamond
   layers:
   - Default
   - TransparentFX
