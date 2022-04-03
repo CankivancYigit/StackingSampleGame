@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,11 +13,11 @@ public class GameManager : MonoBehaviour
     }
 
     private States _states;
-    
-    // Start is called before the first frame update
-    void Start()
+
+
+    private void Start()
     {
-        
+        PlayerController.Instance.CurrentSpeed = 0;
     }
 
     // Update is called once per frame
@@ -31,10 +32,20 @@ public class GameManager : MonoBehaviour
                 }
                 return;
             case States.Game:
-                if (Player.Instance.characters[0].GetComponent<Animator>().GetBool("Run 1") != true)
+
+                if (PlayerController.Instance.CurrentSpeed == 0)
                 {
-                    Player.Instance.characters[0].GetComponent<Animator>().SetBool("Run 1",true);
+                    PlayerController.Instance.CurrentSpeed = PlayerController.Instance.speed;
                 }
+
+                for (int i = 0; i < Player.Instance.characters.Count; i++)
+                {
+                    if (Player.Instance.characters[i].GetComponent<Animator>().GetBool("Run 1") != true)
+                    {
+                        Player.Instance.characters[i].GetComponent<Animator>().SetBool("Run 1",true);
+                    }
+                }
+               
                 return;
             case States.GameEnd:
                 return;

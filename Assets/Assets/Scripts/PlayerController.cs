@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Instance;
     public float speed = 100f;
     // [SerializeField] float lerpValue = 20f;
     public float InputSensitivity = 0.01f;
@@ -10,13 +11,25 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField] float clampValue = 10f;
     
-    private Rigidbody rgb;
-    private Vector3 PreviousMousePosition;
-    private float DesiredHorizontalPosition;
+    private Rigidbody _rgb;
+    private Vector3 _previousMousePosition;
+    private float _desiredHorizontalPosition;
+    private float _currentSpeed;
+
+    public float CurrentSpeed
+    {
+        get => _currentSpeed;
+        set => _currentSpeed = value;
+    }
 
     private void Awake()
     {
-        rgb = GetComponent<Rigidbody>();
+        _rgb = GetComponent<Rigidbody>();
+        _currentSpeed = speed;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
     }
 
     protected void Update()
@@ -25,17 +38,17 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                PreviousMousePosition = Input.mousePosition;
+                _previousMousePosition = Input.mousePosition;
             }
             if (Input.GetMouseButton(0))
             {
                 var currentMousePosition = Input.mousePosition;
-                var mouseDelta = currentMousePosition - PreviousMousePosition;
+                var mouseDelta = currentMousePosition - _previousMousePosition;
 
-                DesiredHorizontalPosition += mouseDelta.x * InputSensitivity;
-                DesiredHorizontalPosition = Mathf.Clamp(DesiredHorizontalPosition, -clampValue, clampValue);
+                _desiredHorizontalPosition += mouseDelta.x * InputSensitivity;
+                _desiredHorizontalPosition = Mathf.Clamp(_desiredHorizontalPosition, -clampValue, clampValue);
 
-                PreviousMousePosition = currentMousePosition;
+                _previousMousePosition = currentMousePosition;
             }
         }
     }
@@ -47,14 +60,14 @@ public class PlayerController : MonoBehaviour
     
     void Walk()
     {
-        var velocity = new Vector3(0, rgb.velocity.y, speed);
+        var velocity = new Vector3(0, _rgb.velocity.y, _currentSpeed);
 
-        var currentPositionX = rgb.position.x;
-        var targetPositionX = DesiredHorizontalPosition;
+        var currentPositionX = _rgb.position.x;
+        var targetPositionX = _desiredHorizontalPosition;
         var requiredVelocity = (targetPositionX - currentPositionX) / Time.deltaTime;
         velocity.x = requiredVelocity;
 
-        rgb.velocity = velocity;
+        _rgb.velocity = velocity;
 
     }
 }
