@@ -66,7 +66,8 @@ MonoBehaviour:
   characters:
   - {fileID: 1315005521088272101}
   stackGap: 1
-  objectStackAnimDelay: 0.1
+  objectStackAnimDelay: 0.05
+  horizontalMoveDelay: 0.05
 --- !u!54 &2233432868610797083
 Rigidbody:
   m_ObjectHideFlags: 0
