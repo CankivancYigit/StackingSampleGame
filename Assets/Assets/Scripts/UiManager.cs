@@ -26,7 +26,12 @@ public class UiManager : MonoBehaviour
 			Instance = this;
 		}
 	}
-	
+
+	private void Start()
+	{
+		SetLevelText();
+	}
+
 	public void SetCoinAmountText()
 	{
 		coinText.text = ScoreSystem.Instance.CoinCount.ToString();
@@ -34,7 +39,7 @@ public class UiManager : MonoBehaviour
 
 	public void SetLevelText()
 	{
-		//levelText.text = "Level" + 
+		levelText.text = "Level " + (LevelManager.Instance.CurrentSceneIndex + 1);
 	}
 		
 	public void GameStartButtonClicked()
