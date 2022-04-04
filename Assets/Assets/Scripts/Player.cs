@@ -8,12 +8,15 @@ public class Player : MonoBehaviour
 {
     public static Player Instance;
     public List<GameObject> characters = new List<GameObject>();
-    
+
+    [SerializeField] private int maxStackAmount = 10;
     [SerializeField] private float stackGap;
     [SerializeField] private float objectStackAnimDelay = 0.2f;
     [SerializeField] private float horizontalMoveDelay = 0.1f;
     
     private Vector3 objectScale;
+    
+    public int MaxStackAmount => maxStackAmount;
     
     private void Awake()
     {
