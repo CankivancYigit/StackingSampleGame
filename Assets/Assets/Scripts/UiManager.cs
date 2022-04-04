@@ -6,33 +6,46 @@ using UnityEngine;
 
 public class UiManager : MonoBehaviour
 {
-    public static UiManager Instance;
+	public static UiManager Instance;
 
-    [SerializeField] private TextMeshProUGUI levelText;
-    [SerializeField] private TextMeshProUGUI coinText;
+	[SerializeField] private TextMeshProUGUI levelText;
+	[SerializeField] private TextMeshProUGUI coinText;
+	[SerializeField] private TextMeshProUGUI header;
+	[SerializeField] private GameObject tapToPlayPanel;
+	[SerializeField] private GameObject upgradeButton;
 
-    [SerializeField] private GameObject TapToPlayPanel;
-    
-    private void Awake()
-    {
-	    if (Instance == null)
-	    {
-		    Instance = this;
-	    }
-    }
+	private void Awake()
+	{
+		if (Instance == null)
+		{
+			Instance = this;
+		}
+	}
 
-    public void SetCoinAmountText()
-    {
-	    coinText.text = ScoreSystem.Instance.CoinCount.ToString();
-    }
+	private void OnEnable()
+	{
+		GameManager.GameStartedEvent += OnGameStarted;
+	}
 
-    public void SetLevelText()
-    {
-	    //levelText.text = "Level" + 
-    }
+	private void OnDisable()
+	{
+		GameManager.GameStartedEvent -= OnGameStarted;
+	}
 
-    public void SetTapToPlayPanel(bool isActive)
-    {
-	    TapToPlayPanel.SetActive(isActive);
-    }
+	public void SetCoinAmountText()
+	{
+		coinText.text = ScoreSystem.Instance.CoinCount.ToString();
+	}
+
+	public void SetLevelText()
+	{
+		//levelText.text = "Level" + 
+	}
+		
+	private void OnGameStarted()
+	{
+		tapToPlayPanel.SetActive(false);
+		header.gameObject.SetActive(false);
+		upgradeButton.SetActive(false);
+	}
 }

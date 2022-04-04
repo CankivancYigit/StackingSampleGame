@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
         GameEnd
     }
 
+    public delegate void GameStarted();
+
+    public static event GameStarted GameStartedEvent;
+    
     private States _states;
 
 
@@ -29,6 +33,11 @@ public class GameManager : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     _states = States.Game;
+
+                    if (GameStartedEvent != null)
+                    {
+                        GameStartedEvent();
+                    }
                 }
                 return;
             case States.Game:
