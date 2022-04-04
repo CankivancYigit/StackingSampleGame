@@ -9,10 +9,14 @@ public class CharacterCollisionHandler : MonoBehaviour
 	{
 		if (other.gameObject.CompareTag("Stackable"))
 		{
-			Player.Instance.StackObjects(other.gameObject,Player.Instance.characters.Count - 1);
-			Player.Instance.characters.Add(other.gameObject);
-			other.gameObject.GetComponent<Animator>().SetBool("Run 1",true);
-			other.gameObject.tag = "Untagged";
+			if ( Player.Instance.characters.Count < Player.Instance.MaxStackAmount)
+			{
+				Player.Instance.StackObjects(other.gameObject,Player.Instance.characters.Count - 1);
+				Player.Instance.characters.Add(other.gameObject);
+				Player.Instance.GetComponentInChildren<StackBar>().UpdateStackBar();
+				other.gameObject.GetComponent<Animator>().SetBool("Run 1",true);
+				other.gameObject.tag = "Untagged";
+			}
 		}
 
 		if (other.gameObject.CompareTag("Collectible"))

@@ -44,15 +44,7 @@ public class GameManager : MonoBehaviour
                 {
                     PlayerController.Instance.CurrentSpeed = PlayerController.Instance.speed;
                 }
-
-                for (int i = 0; i < Player.Instance.characters.Count; i++)
-                {
-                    if (Player.Instance.characters[i].GetComponent<Animator>().GetBool("Run 1") != true)
-                    {
-                        Player.Instance.characters[i].GetComponent<Animator>().SetBool("Run 1",true);
-                    }
-                }
-               
+                
                 return;
             case States.GameEnd:
                 

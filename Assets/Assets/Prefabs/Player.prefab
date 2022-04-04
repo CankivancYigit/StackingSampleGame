@@ -143,6 +143,7 @@ MonoBehaviour:
   - {fileID: 1315005521088272101}
   maxStackAmount: 10
   stackGap: 1
+  stackBar: {fileID: 2509407320971017119}
   objectStackAnimDelay: 0.05
   horizontalMoveDelay: 0.05
 --- !u!54 &2233432868610797083
@@ -194,7 +195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6137230017072440425
 RectTransform:
   m_ObjectHideFlags: 0

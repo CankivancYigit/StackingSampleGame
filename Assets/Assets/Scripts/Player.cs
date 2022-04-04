@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private int maxStackAmount = 10;
     [SerializeField] private float stackGap;
+    [SerializeField] private GameObject stackBar;
     [SerializeField] private float objectStackAnimDelay = 0.2f;
     [SerializeField] private float horizontalMoveDelay = 0.1f;
     
@@ -29,8 +30,19 @@ public class Player : MonoBehaviour
     private void Start()
     {
        objectScale  = characters[0].transform.localScale;
+       stackBar.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        UiManager.GameStartedEvent += OnGameStarted;
+    }
+
+    private void OnDisable()
+    {
+        UiManager.GameStartedEvent -= OnGameStarted;
+    }
+    
     private void Update()
     {
         HorizontalMoveObjectsWithDelay();
@@ -66,6 +78,19 @@ public class Player : MonoBehaviour
             Vector3 pos = characters[i].transform.position;
             pos.x = characters[i - 1].transform.position.x;
             characters[i].transform.DOMoveX(pos.x, horizontalMoveDelay);
+        }
+    }
+    
+    private void OnGameStarted()
+    {
+        stackBar.SetActive(true);
+        
+        for (int i = 0; i < characters.Count; i++)
+        {
+            if (characters[i].GetComponent<Animator>().GetBool("Run 1") != true)
+            {
+                characters[i].GetComponent<Animator>().SetBool("Run 1",true);
+            }
         }
     }
 }

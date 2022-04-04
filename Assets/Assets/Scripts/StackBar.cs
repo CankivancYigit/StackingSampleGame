@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,12 +10,11 @@ public class StackBar : MonoBehaviour
     
     void Start()
     {
-        stackFill.fillAmount =   (float)Player.Instance.characters.Count / (float)Player.Instance.MaxStackAmount;
+        stackFill.fillAmount = (float)Player.Instance.characters.Count / (float)Player.Instance.MaxStackAmount;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateStackBar()
     {
-        
+        stackFill.fillAmount = (float)Player.Instance.characters.Count / (float)Player.Instance.MaxStackAmount;
     }
 }
