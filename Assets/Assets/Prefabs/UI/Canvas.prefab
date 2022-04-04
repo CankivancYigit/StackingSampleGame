@@ -132,6 +132,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &155736636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2645935208272300534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c74d703e3a3be348a775ff54a47f7a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeCostText: {fileID: 1482004840221032439}
 --- !u!1 &5242277222331906904
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,6 +629,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5242277222331906908}
     m_Modifications:
+    - target: {fileID: 3174385390416326047, guid: c47b5dd9351ccba4cadbbd1e0170f019, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3174385390416326047, guid: c47b5dd9351ccba4cadbbd1e0170f019, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 0.4716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 3174385390416326047, guid: c47b5dd9351ccba4cadbbd1e0170f019, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 0.4716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 3174385390416326047, guid: c47b5dd9351ccba4cadbbd1e0170f019, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 0.4716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 3174385390416326047, guid: c47b5dd9351ccba4cadbbd1e0170f019, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3174385390416326047, guid: c47b5dd9351ccba4cadbbd1e0170f019, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3174385390416326047, guid: c47b5dd9351ccba4cadbbd1e0170f019, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 155736636}
+    - target: {fileID: 3174385390416326047, guid: c47b5dd9351ccba4cadbbd1e0170f019, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3174385390416326047, guid: c47b5dd9351ccba4cadbbd1e0170f019, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpgradeButtonClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 3174385390416326047, guid: c47b5dd9351ccba4cadbbd1e0170f019, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UpgradeButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3174385390416326047, guid: c47b5dd9351ccba4cadbbd1e0170f019, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5926806391935398348, guid: c47b5dd9351ccba4cadbbd1e0170f019, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -716,6 +773,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5926806391935398348, guid: c47b5dd9351ccba4cadbbd1e0170f019, type: 3}
   m_PrefabInstance: {fileID: 6836016853774472987}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1482004840221032439 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5354580467775908076, guid: c47b5dd9351ccba4cadbbd1e0170f019, type: 3}
+  m_PrefabInstance: {fileID: 6836016853774472987}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8857879761085396811
 PrefabInstance:
   m_ObjectHideFlags: 0
