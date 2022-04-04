@@ -8,11 +8,16 @@ public class UiManager : MonoBehaviour
 {
 	public static UiManager Instance;
 
+	public delegate void GameStarted();
+
+	public static event GameStarted GameStartedEvent;
+	
 	[SerializeField] private TextMeshProUGUI levelText;
 	[SerializeField] private TextMeshProUGUI coinText;
 	[SerializeField] private TextMeshProUGUI header;
 	[SerializeField] private GameObject tapToPlayPanel;
 	[SerializeField] private GameObject upgradeButton;
+	[SerializeField] private GameObject gameStartButton;
 
 	private void Awake()
 	{
@@ -21,17 +26,7 @@ public class UiManager : MonoBehaviour
 			Instance = this;
 		}
 	}
-
-	private void OnEnable()
-	{
-		GameManager.GameStartedEvent += OnGameStarted;
-	}
-
-	private void OnDisable()
-	{
-		GameManager.GameStartedEvent -= OnGameStarted;
-	}
-
+	
 	public void SetCoinAmountText()
 	{
 		coinText.text = ScoreSystem.Instance.CoinCount.ToString();
@@ -42,8 +37,13 @@ public class UiManager : MonoBehaviour
 		//levelText.text = "Level" + 
 	}
 		
-	private void OnGameStarted()
+	public void GameStartButtonClicked()
 	{
+		if (GameStartedEvent != null)
+		{
+			GameStartedEvent();
+		}
+		
 		tapToPlayPanel.SetActive(false);
 		header.gameObject.SetActive(false);
 		upgradeButton.SetActive(false);

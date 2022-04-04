@@ -11,14 +11,20 @@ public class GameManager : MonoBehaviour
         Game,
         GameEnd
     }
-
-    public delegate void GameStarted();
-
-    public static event GameStarted GameStartedEvent;
     
     private States _states;
 
 
+    private void OnEnable()
+    {
+        UiManager.GameStartedEvent += OnGameStarted;
+    }
+
+    private void OnDisable()
+    {
+        UiManager.GameStartedEvent -= OnGameStarted;
+    }
+    
     private void Start()
     {
         PlayerController.Instance.CurrentSpeed = 0;
@@ -30,15 +36,7 @@ public class GameManager : MonoBehaviour
         switch (_states)
         {
             case States.TapToPlay:
-                if (Input.GetMouseButtonDown(0))
-                {
-                    _states = States.Game;
-
-                    if (GameStartedEvent != null)
-                    {
-                        GameStartedEvent();
-                    }
-                }
+               
                 return;
             case States.Game:
 
@@ -57,7 +55,13 @@ public class GameManager : MonoBehaviour
                
                 return;
             case States.GameEnd:
+                
                 return;
         }
+    }
+    
+    private void OnGameStarted()
+    {
+        _states = States.Game;
     }
 }
