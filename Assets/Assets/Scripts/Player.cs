@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using DG.Tweening;
 using UnityEngine;
 
@@ -13,12 +14,21 @@ public class Player : MonoBehaviour
     [SerializeField] private int maxStackAmount = 10;
     [SerializeField] private float stackGap;
     [SerializeField] private GameObject stackBar;
+    
     [SerializeField] private float objectStackAnimDelay = 0.2f;
     [SerializeField] private float horizontalMoveDelay = 0.1f;
+
+    [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
     
     private Vector3 objectScale;
     
     public int MaxStackAmount => maxStackAmount;
+    
+    public CinemachineVirtualCamera CinemachineVirtualCamera
+    {
+        get => cinemachineVirtualCamera;
+        set => cinemachineVirtualCamera = value;
+    }
     
     private void Awake()
     {

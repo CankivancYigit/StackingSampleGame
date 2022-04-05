@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class CharacterCollisionHandler : MonoBehaviour
@@ -45,9 +46,26 @@ public class CharacterCollisionHandler : MonoBehaviour
 		
 		if (other.gameObject.CompareTag("Finish"))
 		{
+			other.gameObject.transform.Find("Finish Point Transform").transform.localPosition -= transform.forward/2;
+			
 			if (gameObject == Player.Instance.characters[0])
 			{
-				ScoreSystem.Instance.IncreaseTotalCoinCount();
+				PlayerController.Instance.enabled = false;
+				
+				Player.Instance.GetComponentInChildren<StackBar>().gameObject.SetActive(false);
+				
+				Player.Instance.CinemachineVirtualCamera.Follow = gameObject.transform;
+				
+				transform.DOMove(other.gameObject.transform.Find("Finish Point Transform").transform.position, 1)
+					.OnComplete(() => transform.DOLocalRotate(new Vector3(transform.localRotation.x, 180, transform.localRotation.z), 1)
+						.OnComplete(() => transform.GetComponent<Animator>().SetBool("Dance",true)));
+			}
+			else
+			{
+				transform.DOMove(other.gameObject.transform.Find("Finish Point Transform").transform.position, 1)
+					.OnComplete(() => transform.DOLocalRotate(new Vector3(transform.localRotation.x, 180, transform.localRotation.z), 1)
+						.OnComplete(() => transform.GetComponent<Animator>().SetBool("Dance",true)));
+				//Destroy(gameObject);
 			}
 		}
 	}
