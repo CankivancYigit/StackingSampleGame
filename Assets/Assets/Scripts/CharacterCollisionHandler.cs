@@ -35,10 +35,12 @@ public class CharacterCollisionHandler : MonoBehaviour
 
 		if (other.gameObject.CompareTag("Obstacle"))
 		{
-			Destroy(Player.Instance.characters[Player.Instance.characters.Count - 1].gameObject);
-			Player.Instance.characters.Remove(Player.Instance.characters[Player.Instance.characters.Count - 1].gameObject);
-			Player.Instance.GetComponentInChildren<StackBar>().UpdateStackBar();
-			
+			if (gameObject != Player.Instance.characters[0])
+			{
+				Destroy(Player.Instance.characters[Player.Instance.characters.Count - 1].gameObject);
+				Player.Instance.characters.Remove(Player.Instance.characters[Player.Instance.characters.Count - 1].gameObject);
+				Player.Instance.GetComponentInChildren<StackBar>().UpdateStackBar();
+			}
 		}
 		
 		if (other.gameObject.CompareTag("Finish"))
