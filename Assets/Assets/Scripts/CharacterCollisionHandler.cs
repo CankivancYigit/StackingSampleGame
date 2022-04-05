@@ -33,6 +33,13 @@ public class CharacterCollisionHandler : MonoBehaviour
 			Destroy(other.gameObject);
 		}
 
+		if (other.gameObject.CompareTag("Obstacle"))
+		{
+			Player.Instance.characters.Remove(gameObject);
+			Player.Instance.GetComponentInChildren<StackBar>().UpdateStackBar();
+			Destroy(gameObject);
+		}
+		
 		if (other.gameObject.CompareTag("Finish"))
 		{
 			if (gameObject == Player.Instance.characters[0])

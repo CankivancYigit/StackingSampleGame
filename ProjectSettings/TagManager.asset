@@ -7,6 +7,7 @@ TagManager:
   - Stackable
   - Collectible
   - Diamond
+  - Obstacle
   layers:
   - Default
   - TransparentFX
