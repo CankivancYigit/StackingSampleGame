@@ -5,9 +5,9 @@ using UnityEngine;
 public class Rotator : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed = 10f;
-    
+    [SerializeField] private Vector3 rotationAxis;
     void Update()
     {
-        transform.Rotate(new Vector3(0f,rotationSpeed,0f) * Time.deltaTime);
+        transform.Rotate(rotationSpeed * rotationAxis * Time.deltaTime);
     }
 }
