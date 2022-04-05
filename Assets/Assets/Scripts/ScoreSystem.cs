@@ -23,7 +23,7 @@ public class ScoreSystem : MonoBehaviour
         }
     }
 
-    public void IncreaseCoinCount(int gain)
+    public void ChangeCoinCount(int gain)
     {
         _coinCount += gain;
     }

@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public static Player Instance;
     public List<GameObject> characters = new List<GameObject>();
 
+    [SerializeField] private GameObject stackCharacterPrefab;
     [SerializeField] private int maxStackAmount = 10;
     [SerializeField] private float stackGap;
     [SerializeField] private GameObject stackBar;
@@ -36,11 +37,13 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         UiManager.GameStartedEvent += OnGameStarted;
+        UpgradeButton.upgradeButtonClickedEvent += OnUpgradeButtonClicked;
     }
 
     private void OnDisable()
     {
         UiManager.GameStartedEvent -= OnGameStarted;
+        UpgradeButton.upgradeButtonClickedEvent -= OnUpgradeButtonClicked;
     }
     
     private void Update()
@@ -91,6 +94,17 @@ public class Player : MonoBehaviour
             {
                 characters[i].GetComponent<Animator>().SetBool("Run 1",true);
             }
+        }
+    }
+    
+    private void OnUpgradeButtonClicked()
+    {
+        if (characters.Count < maxStackAmount)
+        {
+            var newStackCharacter = Instantiate(stackCharacterPrefab, characters[characters.Count - 1].transform.localPosition,characters[characters.Count - 1].transform.localRotation);
+            StackObjects(newStackCharacter,characters.Count - 1);
+            newStackCharacter.tag = "Untagged";
+            characters.Add(newStackCharacter);
         }
     }
 }

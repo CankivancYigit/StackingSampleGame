@@ -30,8 +30,19 @@ public class UiManager : MonoBehaviour
 	private void Start()
 	{
 		SetLevelText();
+		SetCoinAmountText();
 	}
 
+	private void OnEnable()
+	{
+		UpgradeButton.upgradeButtonClickedEvent += OnUpgradeButtonClicked;
+	}
+
+	private void OnDisable()
+	{
+		UpgradeButton.upgradeButtonClickedEvent -= OnUpgradeButtonClicked;
+	}
+	
 	public void SetCoinAmountText()
 	{
 		coinText.text = ScoreSystem.Instance.CoinCount.ToString();
@@ -42,6 +53,11 @@ public class UiManager : MonoBehaviour
 		levelText.text = "Level " + (LevelManager.Instance.CurrentSceneIndex + 1);
 	}
 		
+	private void OnUpgradeButtonClicked()
+	{
+		SetCoinAmountText();
+	}
+	
 	public void GameStartButtonClicked()
 	{
 		if (GameStartedEvent != null)

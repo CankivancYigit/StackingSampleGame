@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 public class UpgradeButton : MonoBehaviour
 {
+    public delegate void UpgradeButtonClicked();
+
+    public static event UpgradeButtonClicked upgradeButtonClickedEvent;
+    
     [SerializeField] private TextMeshProUGUI upgradeCostText;
     
     private static int _upgradeCost = 30;
@@ -19,7 +23,7 @@ public class UpgradeButton : MonoBehaviour
 
     private void Update()
     {
-        if (ScoreSystem.Instance.CoinCount >_upgradeCost)
+        if (ScoreSystem.Instance.CoinCount >_upgradeCost && Player.Instance.characters.Count < Player.Instance.MaxStackAmount)
         {
             gameObject.GetComponent<Button>().interactable = true;
         }
@@ -29,9 +33,16 @@ public class UpgradeButton : MonoBehaviour
         }
     }
 
-    public void UpgradeButtonClicked()
+    public void UpgradeButtonClick()
     {
         _upgradeCost = (int)Mathf.Pow(_upgradeCost, 1.05f);
         upgradeCostText.text = _upgradeCost.ToString();
+        
+        ScoreSystem.Instance.ChangeCoinCount(-_upgradeCost);
+        
+        if (upgradeButtonClickedEvent != null)
+        {
+            upgradeButtonClickedEvent();
+        }
     }
 }
