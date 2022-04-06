@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+    
     public enum States
     {
         TapToPlay,
@@ -12,8 +14,16 @@ public class GameManager : MonoBehaviour
         GameEnd
     }
     
-    private States _states;
+    public States _states;
+    
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
 
     private void OnEnable()
     {
@@ -47,6 +57,12 @@ public class GameManager : MonoBehaviour
                 
                 return;
             case States.GameEnd:
+
+                if (!UiManager.Instance.SuccessPanel.activeInHierarchy)
+                {
+                    UiManager.Instance.SuccessPanel.SetActive(true);
+                    Debug.Log("abc");
+                }
                 
                 return;
         }

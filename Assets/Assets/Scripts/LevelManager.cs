@@ -10,24 +10,32 @@ public class LevelManager : MonoBehaviour
     
     public static bool ReachedLastLevel = false;
 
-    private const string SavedLevel = "SavedLevel";
+    private string SavedLevel = "SavedLevel";
     private int _currentSceneIndex;
+    private static int _levelNumber;
 
-    public int CurrentSceneIndex => _currentSceneIndex;
-
+    public int LevelNumber => _levelNumber;
+    
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
         }
-    }
-
-    private void Start()
-    {
+        
         _currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        
+        if (!ReachedLastLevel)
+        {
+            _levelNumber = _currentSceneIndex + 1;
+        }
+        
+        if (PlayerPrefs.HasKey(SavedLevel))
+        {
+            _levelNumber = PlayerPrefs.GetInt(SavedLevel);
+        }
     }
-
+    
     private void LoadLevel(int levelIndex)
     {
         SceneManager.LoadScene(levelIndex);
@@ -40,9 +48,8 @@ public class LevelManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        // Scene currentScene = SceneManager.GetActiveScene();
-        // _currentSceneIndex = currentScene.buildIndex;
-            
+        _levelNumber++;
+        
         int nextSceneIndex = _currentSceneIndex + 1;
 
         int totalSceneCount = SceneManager.sceneCountInBuildSettings;
@@ -57,5 +64,11 @@ public class LevelManager : MonoBehaviour
         }
 
         LoadLevel(nextSceneIndex);
+        SaveLevel();
+    }
+    
+    public void SaveLevel()
+    {
+        PlayerPrefs.SetInt(SavedLevel,_levelNumber);
     }
 }

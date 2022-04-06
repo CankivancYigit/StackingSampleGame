@@ -50,6 +50,8 @@ public class CharacterCollisionHandler : MonoBehaviour
 			
 			if (gameObject == Player.Instance.characters[0])
 			{
+				GameManager.Instance._states = GameManager.States.GameEnd;
+				
 				PlayerController.Instance.enabled = false;
 				
 				Player.Instance.GetComponentInChildren<StackBar>().gameObject.SetActive(false);

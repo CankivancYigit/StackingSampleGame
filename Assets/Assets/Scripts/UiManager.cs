@@ -18,6 +18,9 @@ public class UiManager : MonoBehaviour
 	[SerializeField] private GameObject tapToPlayPanel;
 	[SerializeField] private GameObject upgradeButton;
 	[SerializeField] private GameObject gameStartButton;
+	[SerializeField] private GameObject successPanel;
+
+	public GameObject SuccessPanel => successPanel;
 
 	private void Awake()
 	{
@@ -29,8 +32,8 @@ public class UiManager : MonoBehaviour
 
 	private void Start()
 	{
-		SetLevelText();
 		SetCoinAmountText();
+		SetLevelText();
 	}
 
 	private void OnEnable()
@@ -50,7 +53,7 @@ public class UiManager : MonoBehaviour
 
 	public void SetLevelText()
 	{
-		levelText.text = "Level " + (LevelManager.Instance.CurrentSceneIndex + 1);
+		levelText.text = "Level " + LevelManager.Instance.LevelNumber;
 	}
 		
 	private void OnUpgradeButtonClicked()

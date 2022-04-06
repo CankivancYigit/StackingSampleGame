@@ -14,8 +14,21 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] private TextMeshProUGUI upgradeCostText;
     
     private static int _upgradeCost = 30;
+    private static int _characterStackAmount;
     
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        if (PlayerPrefs.HasKey("SavedUpgradeCost"))
+        {
+            _upgradeCost = PlayerPrefs.GetInt("SavedUpgradeCost");
+        }
+        
+        if (PlayerPrefs.HasKey("SavedCharacterStackAmount"))
+        {
+            _characterStackAmount = PlayerPrefs.GetInt("SavedCharacterStackAmount");
+        }
+    }
+
     void Start()
     {
         upgradeCostText.text = _upgradeCost.ToString();
@@ -23,7 +36,7 @@ public class UpgradeButton : MonoBehaviour
 
     private void Update()
     {
-        if (ScoreSystem.Instance.CoinCount >_upgradeCost && Player.Instance.characters.Count < Player.Instance.MaxStackAmount)
+        if (ScoreSystem.Instance.CoinCount >_upgradeCost && _characterStackAmount < Player.Instance.MaxStackAmount)
         {
             gameObject.GetComponent<Button>().interactable = true;
         }
@@ -40,9 +53,24 @@ public class UpgradeButton : MonoBehaviour
         
         ScoreSystem.Instance.ChangeCoinCount(-_upgradeCost);
         
+        SaveUpgradeCost();
+        
+        ScoreSystem.Instance.SaveCoinAmount();
         if (upgradeButtonClickedEvent != null)
         {
             upgradeButtonClickedEvent();
         }
+        
+        SaveCharacterStackAmount();
+    }
+    
+    public void SaveUpgradeCost()
+    {
+        PlayerPrefs.SetInt("SavedUpgradeCost",_upgradeCost);
+    }
+
+    public void SaveCharacterStackAmount()
+    {
+        PlayerPrefs.SetInt("SavedCharacterStackAmount", Player.Instance.characters.Count);
     }
 }
