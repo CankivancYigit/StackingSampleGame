@@ -47,6 +47,14 @@ public class Player : MonoBehaviour
     {
         UiManager.GameStartedEvent += OnGameStarted;
         UpgradeButton.upgradeButtonClickedEvent += OnUpgradeButtonClicked;
+
+        for (int i = 1; i < characters.Count; i++) //Easy Save 3 RuntimeAnimController Loading Problem ??
+        {
+            if (characters[i].GetComponent<Animator>().runtimeAnimatorController == null)
+            {
+                characters[i].GetComponent<Animator>().runtimeAnimatorController = Resources.Load("Resources/Character") as RuntimeAnimatorController;
+            }
+        }
     }
 
     private void OnDisable()
@@ -96,13 +104,26 @@ public class Player : MonoBehaviour
     private void OnGameStarted()
     {
         stackBar.SetActive(true);
-        
-        for (int i = 0; i < characters.Count; i++)
+
+        if (characters.Count == maxStackAmount)
         {
-            if (characters[i].GetComponent<Animator>().GetBool("Run 1") != true)
+            for (int i = 0; i < characters.Count; i++)
             {
-                characters[i].GetComponent<Animator>().SetBool("Run 1",true);
+                if (characters[i].GetComponent<Animator>().GetBool("Run 2") != true)
+                {
+                    characters[i].GetComponent<Animator>().SetBool("Run 2",true);
+                }
             }
+        }
+        else
+        {
+            for (int i = 0; i < characters.Count; i++)
+            {
+                if (characters[i].GetComponent<Animator>().GetBool("Run 1") != true)
+                {
+                    characters[i].GetComponent<Animator>().SetBool("Run 1",true);
+                }
+            } 
         }
     }
     

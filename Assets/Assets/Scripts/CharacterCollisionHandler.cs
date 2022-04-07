@@ -18,6 +18,16 @@ public class CharacterCollisionHandler : MonoBehaviour
 				other.gameObject.GetComponent<Animator>().SetBool("Run 1",true);
 				other.gameObject.tag = "Untagged";
 			}
+			else
+			{
+				for (int i = 0; i < Player.Instance.characters.Count; i++)
+				{
+					if (Player.Instance.characters[i].GetComponent<Animator>().GetBool("Run 2") != true)
+					{
+						Player.Instance.characters[i].GetComponent<Animator>().SetBool("Run 2",true);
+					}
+				}
+			}
 		}
 
 		if (other.gameObject.CompareTag("Collectible"))
