@@ -21,15 +21,15 @@ namespace ES3Types
 			writer.WriteProperty("applyRootMotion", instance.applyRootMotion, ES3Type_bool.Instance);
 			writer.WriteProperty("updateMode", instance.updateMode, ES3Internal.ES3TypeMgr.GetOrCreateES3Type(typeof(UnityEngine.AnimatorUpdateMode)));
 			writer.WritePrivateProperty("allowConstantClipSamplingOptimization", instance);
-			writer.WriteProperty("bodyPosition", instance.bodyPosition, ES3Type_Vector3.Instance);
-			writer.WritePrivateProperty("bodyPositionInternal", instance);
-			writer.WriteProperty("bodyRotation", instance.bodyRotation, ES3Type_Quaternion.Instance);
-			writer.WritePrivateProperty("bodyRotationInternal", instance);
+			// writer.WriteProperty("bodyPosition", instance.bodyPosition, ES3Type_Vector3.Instance);
+			// writer.WritePrivateProperty("bodyPositionInternal", instance);
+			// writer.WriteProperty("bodyRotation", instance.bodyRotation, ES3Type_Quaternion.Instance);
+			// writer.WritePrivateProperty("bodyRotationInternal", instance);
 			writer.WriteProperty("stabilizeFeet", instance.stabilizeFeet, ES3Type_bool.Instance);
 			writer.WriteProperty("feetPivotActive", instance.feetPivotActive, ES3Type_float.Instance);
 			writer.WriteProperty("speed", instance.speed, ES3Type_float.Instance);
 			writer.WriteProperty("cullingMode", instance.cullingMode, ES3Internal.ES3TypeMgr.GetOrCreateES3Type(typeof(UnityEngine.AnimatorCullingMode)));
-			writer.WriteProperty("playbackTime", instance.playbackTime, ES3Type_float.Instance);
+			// writer.WriteProperty("playbackTime", instance.playbackTime, ES3Type_float.Instance);
 			writer.WriteProperty("recorderStartTime", instance.recorderStartTime, ES3Type_float.Instance);
 			writer.WriteProperty("recorderStopTime", instance.recorderStopTime, ES3Type_float.Instance);
 			writer.WriteProperty("layersAffectMassCenter", instance.layersAffectMassCenter, ES3Type_bool.Instance);
@@ -62,18 +62,18 @@ namespace ES3Types
 					case "allowConstantClipSamplingOptimization":
 					reader.SetPrivateProperty("allowConstantClipSamplingOptimization", reader.Read<System.Boolean>(), instance);
 					break;
-					case "bodyPosition":
-						instance.bodyPosition = reader.Read<UnityEngine.Vector3>(ES3Type_Vector3.Instance);
-						break;
-					case "bodyPositionInternal":
-					reader.SetPrivateProperty("bodyPositionInternal", reader.Read<UnityEngine.Vector3>(), instance);
-					break;
-					case "bodyRotation":
-						instance.bodyRotation = reader.Read<UnityEngine.Quaternion>(ES3Type_Quaternion.Instance);
-						break;
-					case "bodyRotationInternal":
-					reader.SetPrivateProperty("bodyRotationInternal", reader.Read<UnityEngine.Quaternion>(), instance);
-					break;
+					// case "bodyPosition":
+					// 	instance.bodyPosition = reader.Read<UnityEngine.Vector3>(ES3Type_Vector3.Instance);
+					// 	break;
+					// case "bodyPositionInternal":
+					// reader.SetPrivateProperty("bodyPositionInternal", reader.Read<UnityEngine.Vector3>(), instance);
+					// break;
+					// case "bodyRotation":
+					// 	instance.bodyRotation = reader.Read<UnityEngine.Quaternion>(ES3Type_Quaternion.Instance);
+					// 	break;
+					// case "bodyRotationInternal":
+					// reader.SetPrivateProperty("bodyRotationInternal", reader.Read<UnityEngine.Quaternion>(), instance);
+					// break;
 					case "stabilizeFeet":
 						instance.stabilizeFeet = reader.Read<System.Boolean>(ES3Type_bool.Instance);
 						break;
@@ -86,9 +86,9 @@ namespace ES3Types
 					case "cullingMode":
 						instance.cullingMode = reader.Read<UnityEngine.AnimatorCullingMode>();
 						break;
-					case "playbackTime":
-						instance.playbackTime = reader.Read<System.Single>(ES3Type_float.Instance);
-						break;
+					// case "playbackTime":
+					// 	instance.playbackTime = reader.Read<System.Single>(ES3Type_float.Instance);
+					//	break;
 					case "recorderStartTime":
 						instance.recorderStartTime = reader.Read<System.Single>(ES3Type_float.Instance);
 						break;
