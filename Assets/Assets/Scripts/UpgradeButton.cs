@@ -31,11 +31,14 @@ public class UpgradeButton : MonoBehaviour
         //ES3.Load("SavedCharacter",Player.Instance.gameObject);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        if (ScoreSystem.Instance.CoinCount >_upgradeCost && _characterStackAmount < Player.Instance.MaxStackAmount)
+        if (ScoreSystem.Instance.CoinCount >_upgradeCost)
         {
-            gameObject.GetComponent<Button>().interactable = true;
+            if (Player.Instance.characters.Count < Player.Instance.MaxStackAmount)
+            {
+                gameObject.GetComponent<Button>().interactable = true;
+            }
         }
         else
         {

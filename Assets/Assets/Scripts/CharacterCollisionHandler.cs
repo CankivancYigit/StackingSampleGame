@@ -56,8 +56,8 @@ public class CharacterCollisionHandler : MonoBehaviour
 				
 				Player.Instance.GetComponentInChildren<StackBar>().gameObject.SetActive(false);
 				
-				Player.Instance.CinemachineVirtualCamera.Follow = gameObject.transform;
-				
+				GameManager.Instance.CinemachineVirtualCamera.Follow = gameObject.transform;
+
 				transform.DOMove(other.gameObject.transform.Find("Finish Point Transform").transform.position, 1)
 					.OnComplete(() => transform.DOLocalRotate(new Vector3(transform.localRotation.x, 180, transform.localRotation.z), 1)
 						.OnComplete(() => transform.GetComponent<Animator>().SetBool("Dance",true)));

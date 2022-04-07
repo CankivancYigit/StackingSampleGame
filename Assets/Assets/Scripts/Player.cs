@@ -1,14 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Cinemachine;
 using DG.Tweening;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     public static Player Instance;
-    
+
+    private GameObject SavedPlayer;
     
     public List<GameObject> characters = new List<GameObject>();
 
@@ -19,18 +19,10 @@ public class Player : MonoBehaviour
     
     [SerializeField] private float objectStackAnimDelay = 0.2f;
     [SerializeField] private float horizontalMoveDelay = 0.1f;
-
-    [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
     
     private Vector3 objectScale;
     
     public int MaxStackAmount => maxStackAmount;
-    
-    public CinemachineVirtualCamera CinemachineVirtualCamera
-    {
-        get => cinemachineVirtualCamera;
-        set => cinemachineVirtualCamera = value;
-    }
     
     private void Awake()
     {
@@ -39,15 +31,10 @@ public class Player : MonoBehaviour
             Instance = this;
         }
         
-        if(ES3.KeyExists("SavedCharacter"))
+        if (ES3.KeyExists("SavedCharacter"))
         { 
             ES3.Load("SavedCharacter",gameObject);
         }
-        
-
-       //ES3.DeleteKey("SavedCharacter");
-        
-        
     }
 
     private void Start()
@@ -127,8 +114,7 @@ public class Player : MonoBehaviour
             StackObjects(newStackCharacter,characters.Count - 1);
             newStackCharacter.tag = "Untagged";
             characters.Add(newStackCharacter);
-            Invoke("SaveCharacter",1);
-            //SaveCharacter();
+            SaveCharacter();
         }
     }
     

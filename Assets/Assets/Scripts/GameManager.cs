@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -16,7 +17,14 @@ public class GameManager : MonoBehaviour
     
     public States _states;
     
-
+    [SerializeField] private CinemachineVirtualCamera _cinemachineVirtualCamera;
+    
+    public CinemachineVirtualCamera CinemachineVirtualCamera
+    {
+        get => _cinemachineVirtualCamera;
+        set => _cinemachineVirtualCamera = value;
+    }
+    
     private void Awake()
     {
         if (Instance == null)
