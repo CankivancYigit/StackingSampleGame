@@ -22,16 +22,13 @@ public class UpgradeButton : MonoBehaviour
         {
             _upgradeCost = PlayerPrefs.GetInt("SavedUpgradeCost");
         }
-        
-        if (PlayerPrefs.HasKey("SavedCharacterStackAmount"))
-        {
-            _characterStackAmount = PlayerPrefs.GetInt("SavedCharacterStackAmount");
-        }
     }
 
     void Start()
     {
         upgradeCostText.text = _upgradeCost.ToString();
+        
+        //ES3.Load("SavedCharacter",Player.Instance.gameObject);
     }
 
     private void Update()
@@ -61,16 +58,11 @@ public class UpgradeButton : MonoBehaviour
             upgradeButtonClickedEvent();
         }
         
-        SaveCharacterStackAmount();
+        //SaveCharacter();
     }
     
     public void SaveUpgradeCost()
     {
         PlayerPrefs.SetInt("SavedUpgradeCost",_upgradeCost);
-    }
-
-    public void SaveCharacterStackAmount()
-    {
-        PlayerPrefs.SetInt("SavedCharacterStackAmount", Player.Instance.characters.Count);
     }
 }

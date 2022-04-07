@@ -8,6 +8,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player Instance;
+    
+    
     public List<GameObject> characters = new List<GameObject>();
 
     [SerializeField] private GameObject stackCharacterPrefab;
@@ -36,6 +38,16 @@ public class Player : MonoBehaviour
         {
             Instance = this;
         }
+        
+        if(ES3.KeyExists("SavedCharacter"))
+        { 
+            ES3.Load("SavedCharacter",gameObject);
+        }
+        
+
+       //ES3.DeleteKey("SavedCharacter");
+        
+        
     }
 
     private void Start()
@@ -115,6 +127,13 @@ public class Player : MonoBehaviour
             StackObjects(newStackCharacter,characters.Count - 1);
             newStackCharacter.tag = "Untagged";
             characters.Add(newStackCharacter);
+            Invoke("SaveCharacter",1);
+            //SaveCharacter();
         }
+    }
+    
+    public void SaveCharacter()
+    {
+        ES3.Save("SavedCharacter", gameObject);
     }
 }
