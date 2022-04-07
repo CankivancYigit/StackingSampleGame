@@ -52,6 +52,11 @@ public class UpgradeButton : MonoBehaviour
         upgradeCostText.text = _upgradeCost.ToString();
         
         ScoreSystem.Instance.ChangeCoinCount(-_upgradeCost);
+
+        if (ScoreSystem.Instance.CoinCount < 0)
+        {
+            ScoreSystem.Instance.CoinCount = 0;
+        }
         
         SaveUpgradeCost();
         

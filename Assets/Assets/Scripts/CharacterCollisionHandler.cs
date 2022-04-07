@@ -18,7 +18,7 @@ public class CharacterCollisionHandler : MonoBehaviour
 				other.gameObject.GetComponent<Animator>().SetBool("Run 1",true);
 				other.gameObject.tag = "Untagged";
 			}
-			else
+			else if(Player.Instance.characters.Count == Player.Instance.MaxStackAmount)
 			{
 				for (int i = 0; i < Player.Instance.characters.Count; i++)
 				{
@@ -51,6 +51,17 @@ public class CharacterCollisionHandler : MonoBehaviour
 				Destroy(Player.Instance.characters[Player.Instance.characters.Count - 1].gameObject);
 				Player.Instance.characters.Remove(Player.Instance.characters[Player.Instance.characters.Count - 1].gameObject);
 				Player.Instance.GetComponentInChildren<StackBar>().UpdateStackBar();
+			}
+
+			if (Player.Instance.characters.Count == Player.Instance.MaxStackAmount)
+			{
+				for (int i = 0; i < Player.Instance.characters.Count; i++)
+				{
+					if (Player.Instance.characters[i].GetComponent<Animator>().GetBool("Run 1") != true)
+					{
+						Player.Instance.characters[i].GetComponent<Animator>().SetBool("Run 1",true);
+					}
+				}
 			}
 		}
 		

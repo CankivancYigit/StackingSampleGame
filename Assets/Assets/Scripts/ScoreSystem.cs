@@ -6,7 +6,7 @@ using UnityEngine;
 public class ScoreSystem : MonoBehaviour
 {
     public static ScoreSystem Instance;
-    //private static int _totalCoinCount = 0;
+    
     private int _coinCount = 0;
 
     public int CoinCount
@@ -32,12 +32,7 @@ public class ScoreSystem : MonoBehaviour
     {
         _coinCount += gain;
     }
-
-    // public void IncreaseTotalCoinCount()
-    // {
-    //     _totalCoinCount += _coinCount;
-    // }
-
+    
     public void SaveCoinAmount()
     {
         PlayerPrefs.SetInt("SavedCoinAmount",_coinCount);

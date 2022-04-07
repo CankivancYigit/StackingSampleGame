@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
         UiManager.GameStartedEvent += OnGameStarted;
         UpgradeButton.upgradeButtonClickedEvent += OnUpgradeButtonClicked;
 
-        for (int i = 1; i < characters.Count; i++) //Easy Save 3 RuntimeAnimController Loading Problem ??
+        for (int i = 1; i < characters.Count; i++) //For Easy Save 3 RuntimeAnimController Loading Problem ??
         {
             if (characters[i].GetComponent<Animator>().runtimeAnimatorController == null)
             {
